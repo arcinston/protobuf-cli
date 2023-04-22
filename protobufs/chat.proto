@@ -1,0 +1,28 @@
+// protobufs/chat.proto
+syntax = "proto3";
+
+package chat;
+
+service Chat {
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+  rpc StreamMessages (StreamMessagesRequest) returns (stream StreamMessagesResponse);
+}
+
+message SendMessageRequest {
+  string message = 1;
+  string user = 2;
+}
+
+message SendMessageResponse {
+  bool success = 1;
+}
+
+message StreamMessagesRequest {
+}
+
+message StreamMessagesResponse {
+  string message = 1;
+  string user = 2;
+}
+
+option go_package =".";
