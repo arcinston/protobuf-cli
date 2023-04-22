@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 package chat;
+option go_package = "./";
 
 service Chat {
   rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
@@ -25,4 +26,3 @@ message StreamMessagesResponse {
   string user = 2;
 }
 
-option go_package =".";
