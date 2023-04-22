@@ -9,17 +9,21 @@ import (
 	chat "github.com/arcinston/protobuf-cli/protobufs/chat"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func main() {
-	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("failed to dial: %v", err)
 	}
 	defer conn.Close()
 
 	client := chat.NewChatClient(conn)
-	user := "YourUsername"
+	var user string
+	log.Printf("Enter User name ")
+	fmt.Scanln(&user)
+
 	ctx := context.Background()
 
 	// Start listening to messages
@@ -32,7 +36,7 @@ func main() {
 		for {
 			res, err := stream.Recv()
 			if err != nil {
-				log.Fatalf("failed to receive message: %v", err)
+				log.Println("EOF reached , restartign stream")
 			}
 			fmt.Printf("[%s] %s\n", res.User, res.Message)
 		}
@@ -41,9 +45,8 @@ func main() {
 	// Send messages
 	for {
 		fmt.Print("Enter message: ")
-		msg := ""
+		var msg string
 		fmt.Scanln(&msg)
-
 		_, err = client.SendMessage(ctx, &chat.SendMessageRequest{Message: msg, User: user})
 		if err != nil {
 			log.Fatalf("failed to send message: %v", err)
