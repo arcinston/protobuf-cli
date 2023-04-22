@@ -6,7 +6,7 @@
 // - protoc             v3.12.4
 // source: protobufs/chat.proto
 
-package protobuf_cli
+package chat
 
 import (
 	context "context"

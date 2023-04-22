@@ -25,4 +25,4 @@ message StreamMessagesResponse {
   string user = 2;
 }
 
-option go_package ="github.com/arcinson/protobuf-cli";
+option go_package ="github.com/arcinson/protobuf-cli/protobufs/chat";
