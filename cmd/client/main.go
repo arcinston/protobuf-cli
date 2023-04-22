@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/arcinston/protobuf-cli/protobufs/chat"
+	chat "github.com/arcinston/protobuf-cli/protobufs/chat"
 
 	"google.golang.org/grpc"
 )

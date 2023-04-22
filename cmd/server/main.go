@@ -6,7 +6,7 @@ import (
 	"net"
 	"sync"
 
-	"github.com/arcinston/protobuf-cli/protobufs/chat"
+	chat "github.com/arcinston/protobuf-cli/protobufs/chat"
 
 	"google.golang.org/grpc"
 )
